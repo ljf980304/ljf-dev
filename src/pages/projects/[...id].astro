@@ -1,0 +1,62 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getPublishedProjects, type Project } from '../../lib/projects';
+
+export async function getStaticPaths() {
+  const projects = await getPublishedProjects();
+  return projects.map((project) => ({
+    // 参数名必须和文件名 [...id] 一致；用 project.slug 会静默得到 undefined
+    params: { id: project.id },
+    props: { project },
+  }));
+}
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const { title, summary, stack, period, role, demo, repo, highlights } = project.data;
+
+// Astro 7 用函数式 render()，条目本身不再是可渲染对象
+const { Content } = await render(project);
+---
+
+<BaseLayout title={title} description={summary}>
+  <div class="container">
+    <div class="project-hero">
+      <a class="back-link" href="/#projects">← 返回项目列表</a>
+      <h1>{title}</h1>
+      <p class="section__desc">{summary}</p>
+
+      <p class="project-hero__meta">
+        {period && <span>{period}</span>}
+        {role && <span>{role}</span>}
+        {demo && <a href={demo}>在线预览</a>}
+        {repo && <a href={repo}>源码仓库</a>}
+      </p>
+
+      <ul class="chips">
+        {stack.map((item) => <li class="chip">{item}</li>)}
+      </ul>
+    </div>
+
+    <article class="prose">
+      {
+        highlights.length > 0 && (
+          <>
+            <h2>做了什么</h2>
+            <ul>
+              {highlights.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </>
+        )
+      }
+
+      <Content />
+    </article>
+  </div>
+</BaseLayout>

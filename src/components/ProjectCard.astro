@@ -1,0 +1,32 @@
+---
+import type { Project } from '../lib/projects';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const { title, summary, stack, cover, period, role, demo } = project.data;
+
+// 用 entry.id 拼 URL —— Astro 7 里 slug 字段已不存在，写 .slug 会静默得到 undefined
+const href = `/projects/${project.id}/`;
+---
+
+<article class="card">
+  {cover && <img class="card__cover" src={cover} alt={`${title} 界面截图`} loading="lazy" />}
+
+  <div class="card__body">
+    <h3 class="card__title"><a href={href}>{title}</a></h3>
+    <p class="card__summary">{summary}</p>
+
+    <ul class="chips">
+      {stack.map((item) => <li class="chip">{item}</li>)}
+    </ul>
+
+    <p class="card__meta">
+      {period && <span>{period}</span>}
+      {role && <span>{role}</span>}
+      {demo && <span><a href={demo}>在线预览</a></span>}
+    </p>
+  </div>
+</article>

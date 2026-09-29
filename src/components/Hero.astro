@@ -1,0 +1,29 @@
+---
+import { hasResume } from '../lib/site';
+
+const NAME = '李剑峰';
+const ROLE = '前端开发工程师';
+---
+
+<section class="hero">
+  <div class="container">
+    <h1 class="hero__name">{NAME}</h1>
+    <p class="hero__title">{ROLE}</p>
+
+    <div class="hero__tagline">
+      <p>
+        4 年前端开发经验，本科软件工程。主攻 Vue 3 + TypeScript
+        的中后台系统与数据可视化，React / Angular 也有完整项目经验。
+      </p>
+      <p>
+        习惯把工程问题拆开讲清楚：为什么这么选、踩了什么坑、最后怎么解的。
+        下面的项目详情页都是这个思路写的。
+      </p>
+    </div>
+
+    <div class="hero__actions">
+      <a class="btn btn--primary" href="#projects">查看项目</a>
+      {hasResume && <a class="btn" href="/resume.pdf">下载简历（PDF）</a>}
+    </div>
+  </div>
+</section>

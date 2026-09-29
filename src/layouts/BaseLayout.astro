@@ -1,0 +1,63 @@
+---
+import '../styles/global.css';
+import { hasResume } from '../lib/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const SITE_NAME = '李剑峰 · 前端开发';
+const DEFAULT_DESC = '李剑峰的前端作品集 —— 主攻 Vue 3 + TypeScript 的中后台系统与数据可视化。';
+
+const { title = SITE_NAME, description = DEFAULT_DESC } = Astro.props;
+
+// 首页用站点名本身当标题，内页加上后缀
+const fullTitle = title === SITE_NAME ? title : `${title} · ${SITE_NAME}`;
+
+// Astro.site 在配置里已设为 https://ljf-dev.com；本地 dev 时取当前 origin 兜底
+const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin);
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#0f151c" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+  </head>
+
+  <body>
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a class="site-header__brand" href="/">李剑峰</a>
+        <nav class="site-nav">
+          <a href="/#skills">技能栈</a>
+          <a href="/#projects">项目</a>
+          {hasResume && <a href="/resume.pdf">简历</a>}
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>
+          © 2026 李剑峰 · 本站展示的工作项目均已隐去客户与机构名称，只保留技术方案与公开的成果数据
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

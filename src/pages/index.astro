@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import SkillGroup from '../components/SkillGroup.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { getPublishedProjects, groupByCategory } from '../lib/projects';
+
+const projects = await getPublishedProjects();
+const groups = groupByCategory(projects);
+
+const skillGroups = [
+  {
+    label: '框架与语言',
+    items: ['Vue 3 / Vue 2', 'TypeScript', 'React', 'Angular', 'JavaScript (ES6+)'],
+  },
+  {
+    label: 'UI 与数据可视化',
+    items: ['Element Plus', 'Ant Design', 'Naive UI', 'ECharts', '组件库封装'],
+  },
+  {
+    label: '工程化与构建',
+    items: ['Vite', 'Webpack', 'pnpm', '首屏性能调优', '构建体积优化', 'Nginx', 'CI/CD'],
+  },
+  {
+    label: '跨端',
+    items: ['UniApp', 'Taro', '微信小程序', 'H5', 'App'],
+  },
+];
+---
+
+<BaseLayout>
+  <Hero />
+
+  <Section
+    id="skills"
+    title="技能栈"
+    desc="按实际做过的项目归类，没写进简历里的技术不往这放。"
+  >
+    <div class="skills">
+      {skillGroups.map((group) => <SkillGroup label={group.label} items={group.items} />)}
+    </div>
+  </Section>
+
+  <Section
+    id="projects"
+    title="项目"
+    desc="工作项目已隐去客户与机构名称，只保留技术方案和可公开的成果数据。"
+  >
+    {
+      groups.size === 0 && <p class="section__desc">项目内容整理中。</p>
+    }
+
+    {
+      [...groups].map(([category, list]) => (
+        <div class="project-group">
+          <h3 class="project-group__label">{category}</h3>
+          <div class={`cards${list.length === 1 ? ' cards--single' : ''}`}>
+            {list.map((project) => (
+              <ProjectCard project={project} />
+            ))}
+          </div>
+        </div>
+      ))
+    }
+  </Section>
+</BaseLayout>

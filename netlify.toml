@@ -1,0 +1,25 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  # Astro 7 要求 node >=22.12.0；这里跟本地开发版本保持一致。
+  # 注意：不要再放 .nvmrc，两者冲突时的优先级取决于 Netlify 的解析顺序。
+  NODE_VERSION = "24.18.0"
+
+# Astro 的 _astro/ 目录下文件名带内容 hash，可以永久缓存。
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# 截图和简历这类不常变的静态资源，缓存一天。
+[[headers]]
+  for = "/shots/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/resume.pdf"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"

@@ -1,0 +1,15 @@
+---
+interface Props {
+  label: string;
+  items: string[];
+}
+
+const { label, items } = Astro.props;
+---
+
+<div class="skill-group">
+  <h3 class="skill-group__label">{label}</h3>
+  <ul class="chips">
+    {items.map((item) => <li class="chip">{item}</li>)}
+  </ul>
+</div>
