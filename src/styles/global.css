@@ -1,23 +1,23 @@
 /*
- * 设计令牌与「宠物诊所管理后台」Demo 同源，
- * 保证两个站看起来是同一套东西：
- *   --surface 取自该 Demo 的 --sidebar-bg，点缀色取自它的图表调色板。
+ * 浅色版：底色 #ffffff，卡片 #f4f6f8，正文 #0f172a。
+ * 主色从深色版的 #409eff 换成 #0958d9 —— 前者在白底上对比度只有 2.6:1，
+ * 读起来费劲；后者约 6.6:1，达到正文可用标准。
  */
 :root {
-  --bg: #0f151c;
-  --surface: #1f2d3d;
-  --surface-hi: #26364a;
-  --border: rgba(255, 255, 255, 0.08);
-  --border-hi: rgba(255, 255, 255, 0.18);
+  --bg: #ffffff;
+  --surface: #f4f6f8;
+  --surface-hi: #e6ebf1;
+  --border: rgba(15, 23, 42, 0.10);
+  --border-hi: rgba(15, 23, 42, 0.22);
 
-  --text: #e6edf3;
-  --muted: #8b98a5;
+  --text: #0f172a;
+  --muted: #5b6b7f;
 
-  --primary: #409eff;
-  --primary-dim: rgba(64, 158, 255, 0.14);
-  --accent-1: #36cfc9;
-  --accent-2: #ffa940;
-  --accent-3: #9254de;
+  --primary: #0958d9;
+  --primary-dim: rgba(9, 88, 217, 0.10);
+  --accent-1: #0d9488;
+  --accent-2: #b45309;
+  --accent-3: #7c3aed;
 
   --radius: 8px;
   --container: 72rem;
@@ -82,7 +82,7 @@ h3 {
   top: 0;
   z-index: 10;
   backdrop-filter: blur(12px);
-  background: rgba(15, 21, 28, 0.82);
+  background: rgba(255, 255, 255, 0.85);
   border-bottom: 1px solid var(--border);
 }
 
@@ -175,14 +175,14 @@ h3 {
 .btn--primary {
   border-color: transparent;
   background: var(--primary);
-  color: #0b1017;
+  color: #ffffff;
   font-weight: 500;
 }
 
 .btn--primary:hover {
-  background: #66b1ff;
+  background: #1677ff;
   border-color: transparent;
-  color: #0b1017;
+  color: #ffffff;
 }
 
 /* ---------- 区块 ---------- */
@@ -382,7 +382,7 @@ h3 {
 
 .prose p,
 .prose li {
-  color: #cfd8e3;
+  color: #334155;
 }
 
 .prose code {
