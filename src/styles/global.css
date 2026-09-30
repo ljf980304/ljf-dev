@@ -426,6 +426,23 @@ h3 {
   color: var(--muted);
 }
 
+/* 正文图片在构建期被 Sätteri 插件 markdown-image-link 包成了指向原图的链接，
+   点一下看大图。光标给成 zoom-in，让「这里能点」这件事不用额外提示就看得懂。 */
+.prose img {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: zoom-in;
+}
+
+.img-link {
+  display: block;
+}
+
+/* 全局 a:hover 会给整张图加下划线，这里按掉 */
+.img-link:hover {
+  text-decoration: none;
+}
+
 /* ---------- 页脚 ---------- */
 
 .site-footer {
