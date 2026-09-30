@@ -23,3 +23,7 @@
   for = "/resume.pdf"
   [headers.values]
     Cache-Control = "public, max-age=86400"
+    # 简历里有手机号。文件得挂在公开站上（Hero 的下载按钮指着它），
+    # 但没必要让搜索引擎收录 —— 骚扰电话和爬虫绝大多数是从搜索结果起步的。
+    # 挡不住直接扫域名的人，但没有哪种方案能挡住那种。
+    X-Robots-Tag = "noindex, nofollow"
