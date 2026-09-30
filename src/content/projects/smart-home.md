@@ -34,7 +34,7 @@ draft: false
 | 层 | 选型 | 解决什么 |
 |---|---|---|
 | 前端交互层 | Vue 3 + TypeScript + Vite + Electron + Naive UI | 可视化控制面板，打包成 Windows 单文件 exe，另有大字体老年模式 |
-| 后端服务层 | Node.js + Express + SQLite | 设备调度、本地数据；封装米家 / 华为 IoT SDK 与 Matter 协议（matter.js） |
+| 后端服务层 | Node.js + Express + SQLite | 设备调度、本地数据；封装米家 / 华为智联 / Aqara 等国内主流生态 IoT SDK，并以 Matter 协议（matter.js）兜底新设备 |
 | AI 语音能力层 | PaddleSpeech + Porcupine + 端侧开源大模型 + edge-tts | 多方言离线识别、自定义唤醒、自然语言指令解析、方言语音合成 |
 | 扩展能力层 | 内网穿透 + 增量静默升级 | 外网远程访问、不发安装包的版本迭代 |
 
@@ -129,7 +129,7 @@ Node 22.5 起内置了 `node:sqlite`（`DatabaseSync`），零原生依赖。代
 |---|---|---|
 | 基础环境（Node + Express / Vue 3 + TS / SQLite） | 2 天 | ✅ 完成，就是现在这个仓库 |
 | 端侧语音交互（离线唤醒 + ASR + 本地意图理解） | 4 天 | ⬜ 未开始 |
-| 设备中控联动（米家 / Home Assistant 适配 + 场景自动化） | 3 天 | 🚧 场景管理页已完成，设备适配层未开始 |
+| 设备中控联动（米家 / 华为智联 / Aqara 适配 + 场景自动化） | 3 天 | 🚧 场景管理页已完成，设备适配层未开始 |
 | 本地多端同步（Socket.io + 桌面端 / 小程序） | 2 天 | ⬜ 未开始 |
 | 适老化 UI（大字号、大触控区、首页三大按钮） | 1 天 | ⬜ 未开始，现在是普通桌面后台 |
 | 全场景测试与验收 | 2 天 | ⬜ 未开始 |
