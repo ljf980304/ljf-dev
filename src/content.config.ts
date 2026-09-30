@@ -22,6 +22,9 @@ const projects = defineCollection({
     highlights: z.array(z.string()).default([]),
     cover: z.string().optional(),
     demo: z.url().optional(),
+    // 演示站性质各不相同（有的能真连后端，有的只是静态假数据），
+    // 光写「在线预览」会让人误以为都是能用的产品，所以链接文字可覆盖。
+    demoLabel: z.string().default('在线预览'),
     repo: z.url().optional(),
     // 首页排序，小的在前；同值时按 title 兜底，避免顺序不确定
     order: z.number().default(0),

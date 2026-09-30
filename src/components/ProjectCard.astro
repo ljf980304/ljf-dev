@@ -6,7 +6,7 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const { title, summary, stack, cover, period, role, demo, repo } = project.data;
+const { title, summary, stack, cover, period, role, demo, demoLabel, repo } = project.data;
 
 // 用 entry.id 拼 URL —— Astro 7 里 slug 字段已不存在，写 .slug 会静默得到 undefined
 const href = `/projects/${project.id}/`;
@@ -26,7 +26,7 @@ const href = `/projects/${project.id}/`;
     <p class="card__meta">
       {period && <span>{period}</span>}
       {role && <span>{role}</span>}
-      {demo && <span><a href={demo}>在线预览</a></span>}
+      {demo && <span><a href={demo}>{demoLabel}</a></span>}
       {repo && <span><a href={repo}>源码仓库</a></span>}
     </p>
   </div>

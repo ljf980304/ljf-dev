@@ -17,7 +17,7 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const { title, summary, stack, period, role, demo, repo, highlights } = project.data;
+const { title, summary, stack, period, role, demo, demoLabel, repo, highlights } = project.data;
 
 // Astro 7 用函数式 render()，条目本身不再是可渲染对象
 const { Content } = await render(project);
@@ -33,7 +33,7 @@ const { Content } = await render(project);
       <p class="project-hero__meta">
         {period && <span>{period}</span>}
         {role && <span>{role}</span>}
-        {demo && <a href={demo}>在线预览</a>}
+        {demo && <a href={demo}>{demoLabel}</a>}
         {repo && <a href={repo}>源码仓库</a>}
       </p>
 

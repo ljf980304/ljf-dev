@@ -10,6 +10,8 @@ highlights:
   - 设备模型按类型做判别联合，加设备类型不用碰公共字段
   - 后端用 Node 内置 node:sqlite，零原生依赖，Windows 上省掉 node-gyp 编译
 cover: /shots/smart-home-devices.webp
+demo: https://wanshu-demo.netlify.app
+demoLabel: 在线预览（静态演示数据）
 repo: https://github.com/ljf980304/home-ai-smart-home
 order: 2
 draft: false
@@ -108,6 +110,14 @@ Node 22.5 起内置了 `node:sqlite`（`DatabaseSync`），零原生依赖。代
 卡片是**数据驱动**的：每类型一份 `DEVICE_CONTROLS` 清单，控件分三种（开关 / 单选 / 滑块），调整数组就能改默认显示项。布局定了两条 —— 卡片固定高度、四区块；控制区默认最多显示 4 个，超出的收进「···」打开的完整弹窗。风扇有挡位、模式、左右摇头、上下摇头、定时五项，正好用上这个规则。
 
 挡位按真实设备的 4 档物理语义建模（`windLevel: 1 | 2 | 3 | 4`），不是 0–100 的连续值 —— 设备本身就只有四档。
+
+### 在线预览是静态演示数据
+
+[在线预览](https://wanshu-demo.netlify.app) 可以点开关和滑块，但**它是纯前端的静态演示，没有后端**：
+
+后端是 Express + SQLite，静态托管跑不起来。所以构建时带 `--mode demo`，把 HTTP 层整体换成一个内存 fixture（`src/services/demo.ts`），一个请求都不发。数据只活在内存里，**刷新即重置**，页面顶部也标了提示条。
+
+演示逻辑刻意和后端对齐 —— 状态字段按白名单合并、场景列表按 `createdAt` 升序、错误码和文案一致 —— 这样演示站上看到的行为就是真实行为，不是专门糊出来给人看的皮。
 
 ## 一次没排查完的故障
 
